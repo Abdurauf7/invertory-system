@@ -1,16 +1,16 @@
 import React from "react";
 import { Layout } from "antd";
-// import Header from "../Header/";
+import Header from "../header/";
 import Sider from "../sidebar/";
-// import Content from "../Content/";
+import Content from "../content/";
 const App = () => {
   return (
     <>
       <Layout>
         <Sider />
         <Layout>
-          {/* <Header />
-          <Content /> */}
+          <Header />
+          <Content />
           {/* <Layout.Footer>Footer</Layout.Footer> */}
         </Layout>
       </Layout>

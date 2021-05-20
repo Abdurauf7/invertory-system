@@ -1,90 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import {
   RiseOutlined,
   AppstoreOutlined,
   CalendarOutlined,
-  SettingOutlined,
-  LogoutOutlined,
 } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
-
+import brand from "../../../assets/image/logo.png";
 const CustomSider = ({ history, match, location }) => {
   //   let path = location.pathname.split("/");
 
+  const [collapsed, setCollapsed] = useState(false);
+
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed);
+  };
+
   return (
     <Layout.Sider
-      breakpoint="lg"
-      collapsedWidth="0"
-      onBreakpoint={(broken) => {}}
-      onCollapse={(collapsed, type) => {}}
-      style={{ height: "100vh" }}
-      width={200}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+      width={250}
       theme="dark"
+      style={{ minHeight: "100vh" }}
     >
-      <div className="mt-4">
-        <h3 className="text-center text-light">
-          Inventory <br />
-          Management System
-        </h3>
-      </div>
+      {!collapsed ? (
+        <div className="mt-4 " style={{ marginLeft: "1.5em" }}>
+          <h3 className="text-light" style={{ fontSize: 20 }}>
+            Inventory <br />
+            Management System
+          </h3>
+        </div>
+      ) : (
+        <div style={{ width: 50, marginLeft: "1.1em", marginTop: "1em" }}>
+          <img src={brand} alt="brand" style={{ width: "100%" }} />
+        </div>
+      )}
 
       <Menu
+        style={{ marginTop: "2em" }}
         onClick={(value) => history.push(value.key)}
-        className="d-flex flex-column pt-5 justify-content-center"
-        mode="vertical"
         theme="dark"
-        // defaultSelectedKeys={`${match.url}/regions`}
+        defaultSelectedKeys={["/app/dashboard"]}
+        mode="inline"
       >
-        <Menu.Item
-          disabled
-          key={`${match.url}/stat`}
-          className="mt-4"
-          style={{
-            width: 150,
-            marginLeft: "2em",
-            borderRadius: 50,
-          }}
-          icon={<RiseOutlined style={{ fontSize: 21 }} />}
-        >
+        <Menu.Item key="/app/dashboard" icon={<RiseOutlined />}>
           Dashboard
         </Menu.Item>
-        <Menu.Item
-          key={`${match.url}/sellGoods`}
-          className="mt-4 "
-          style={{
-            width: 150,
-            marginLeft: "2em",
-            borderRadius: 50,
-          }}
-          icon={<AppstoreOutlined style={{ fontSize: 21 }} />}
-        >
-          <span>Selling goods</span>
-        </Menu.Item>
-        <Menu.Item
-          key={`${match.url}/checkGoods`}
-          className="mt-4 "
-          style={{
-            width: 150,
-            marginLeft: "2em",
-            borderRadius: 50,
-          }}
-          icon={<AppstoreOutlined style={{ fontSize: 21 }} />}
-        >
-          <span>Checking goods</span>
+        <Menu.Item key="/app/products" icon={<AppstoreOutlined />}>
+          Selling Goods
         </Menu.Item>
 
-        <Menu.Item
-          key="/login"
-          className="mt-3 "
-          style={{
-            width: 150,
-            marginLeft: "2em",
-            borderRadius: 50,
-          }}
-          icon={<LogoutOutlined style={{ fontSize: 21 }} />}
-        >
-          Logout
+        <Menu.Item key="/app/goodsInfo" icon={<CalendarOutlined />}>
+          Information of Goods
         </Menu.Item>
       </Menu>
     </Layout.Sider>

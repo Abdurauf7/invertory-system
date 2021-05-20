@@ -6,7 +6,7 @@ import { Layout, Row, Col, Form, Input, Button, Typography } from "antd";
 
 // Assets
 import background from "../../assets/image/background.jpg";
-import { openNotification } from "../../common/notification";
+// import { openNotification } from "../../common/notification";
 
 const LoginPage = ({ history }) => {
   const layout = {
